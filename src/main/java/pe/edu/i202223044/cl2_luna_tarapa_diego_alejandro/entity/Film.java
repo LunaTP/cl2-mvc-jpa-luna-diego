@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.sql.Timestamp;
+import java.util.List;
 
 @Entity
 @Data
@@ -22,7 +23,7 @@ public class Film {
 
     @ManyToOne
     @JoinColumn(name = "language_id")
-    private Integer languageId;
+    private Language languageId;
 
     private Integer originalLanguageId;
     private Integer rentalDuration;
@@ -32,4 +33,15 @@ public class Film {
     private String rating;
     private String specialFeatures;
     private Timestamp lastUpdate;
+
+    @OneToMany(mappedBy = "film", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private List<FilmActor> filmActors;
+
+    @OneToMany(mappedBy = "film", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private List<FilmCategory> filmCategories;
+
+//    @OneToMany(mappedBy = "filmId", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+//    private List<Inventory> inventories;
+
+
 }

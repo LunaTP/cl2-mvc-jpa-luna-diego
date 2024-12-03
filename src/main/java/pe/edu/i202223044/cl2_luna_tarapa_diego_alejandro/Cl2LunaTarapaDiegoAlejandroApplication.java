@@ -4,7 +4,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class Cl2LunaTarapaDiegoAlejandroApplication {
+public class Cl2LunaTarapaDiegoAlejandroApplication{
 
 	public static void main(String[] args) {
 		SpringApplication.run(Cl2LunaTarapaDiegoAlejandroApplication.class, args);

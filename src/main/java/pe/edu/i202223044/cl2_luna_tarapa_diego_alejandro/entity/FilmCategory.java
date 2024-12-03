@@ -1,7 +1,6 @@
 package pe.edu.i202223044.cl2_luna_tarapa_diego_alejandro.entity;
 
-import jakarta.persistence.EmbeddedId;
-import jakarta.persistence.Entity;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -16,4 +15,9 @@ public class FilmCategory {
     @EmbeddedId
     private FilmCategoryPk filmCategoryPk;
     private Timestamp lastUpdate;
+
+    @ManyToOne
+    @JoinColumn(name = "film_id")
+    @MapsId("filmId")
+    private Film film;
 }
