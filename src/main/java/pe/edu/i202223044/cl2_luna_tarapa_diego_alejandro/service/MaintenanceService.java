@@ -2,10 +2,7 @@ package pe.edu.i202223044.cl2_luna_tarapa_diego_alejandro.service;
 
 import pe.edu.i202223044.cl2_luna_tarapa_diego_alejandro.dto.FilmDetailDto;
 import pe.edu.i202223044.cl2_luna_tarapa_diego_alejandro.dto.FilmDto;
-import pe.edu.i202223044.cl2_luna_tarapa_diego_alejandro.entity.Film;
-import pe.edu.i202223044.cl2_luna_tarapa_diego_alejandro.entity.FilmActor;
-import pe.edu.i202223044.cl2_luna_tarapa_diego_alejandro.entity.FilmCategory;
-import pe.edu.i202223044.cl2_luna_tarapa_diego_alejandro.entity.Language;
+import pe.edu.i202223044.cl2_luna_tarapa_diego_alejandro.entity.*;
 
 import java.util.List;
 
@@ -24,6 +21,9 @@ public interface MaintenanceService {
 
     //UPDATE FILM
     void updateFilm(FilmDetailDto filmDetailDto);
+
+    //DELETE FILM
+    void deleteFilm(Integer id);
 
     /**
      * LANGUAGE
@@ -47,4 +47,11 @@ public interface MaintenanceService {
 
     //GET CATE ALL - HALLAS TODAS LAS CATEGORIAS
     List<FilmCategory> getAllCategories();
+
+    /**
+     * INVENTORIES
+     */
+    //GET INV ALL - HALLAR TODOS LOS INVENTARIOS
+    List<Inventory> getAllInventories(int filmId);
+
 }

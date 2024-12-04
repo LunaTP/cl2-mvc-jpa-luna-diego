@@ -9,10 +9,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import pe.edu.i202223044.cl2_luna_tarapa_diego_alejandro.dto.FilmDetailDto;
 import pe.edu.i202223044.cl2_luna_tarapa_diego_alejandro.dto.FilmDto;
-import pe.edu.i202223044.cl2_luna_tarapa_diego_alejandro.entity.Film;
-import pe.edu.i202223044.cl2_luna_tarapa_diego_alejandro.entity.FilmActor;
-import pe.edu.i202223044.cl2_luna_tarapa_diego_alejandro.entity.FilmCategory;
-import pe.edu.i202223044.cl2_luna_tarapa_diego_alejandro.entity.Language;
+import pe.edu.i202223044.cl2_luna_tarapa_diego_alejandro.entity.*;
 import pe.edu.i202223044.cl2_luna_tarapa_diego_alejandro.service.MaintenanceService;
 
 import java.util.List;
@@ -41,6 +38,9 @@ public class MaintenanceController {
         FilmDetailDto filmDetailDto = maintenanceService.getFilmById(id);
         List<FilmActor> filmActors = maintenanceService.getActorFilmById(id);
         List<FilmCategory> filmCategories = maintenanceService.getCategoryFilmById(id);
+        List<Inventory> inventories = maintenanceService.getAllInventories(id);
+
+        model.addAttribute("inventories",inventories);
         model.addAttribute("filmCategories",filmCategories);
         model.addAttribute("filmActors",filmActors);
         model.addAttribute("filmDetailDto", filmDetailDto);
@@ -84,4 +84,19 @@ public class MaintenanceController {
         return "redirect:/maintenance/start";
     }
 
+    /**
+     * DELETE
+     */
+//    @GetMapping("/delete/{id}")
+//    public String delete(@PathVariable Integer id, Model model) {
+//        FilmDetailDto filmDetailDto = maintenanceService.getFilmById(id);
+//        model.addAttribute("filmDetailDto", filmDetailDto);
+//        return "maintenance-delete";
+//    }
+
+    @PostMapping("/delete/{id}")
+    public String deleteFilm(@PathVariable Integer id) {
+        maintenanceService.deleteFilm(id);
+        return "redirect:/maintenance/start";
+    }
 }

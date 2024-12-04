@@ -2,30 +2,27 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Mantenimiento de Películas</title>
+    <title>Eliminar Película</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 </head>
 <body>
-<div class="container mt-4">
+<div class="container mt-5">
     <div class="d-flex gap-2">
         <a th:href="@{/maintenance/start}" class="btn btn-primary btn-sm text-white">Volver</a>
     </div>
-    <div class="text-center mb-4">
-        <h3 class="text-primary">Detalle de Película</h3>
-    </div>
-    <form th:object="${filmDetailDto}" class="p-4 bg-light rounded shadow-sm">
-        <div class="mb-3 row align-items-center">
-            <label for="filmId" class="col-sm-3 col-form-label fw-bold">Código:</label>
+    <h3 class="text-center text-primary mb-4">Eliminar Película</h3>
+    <form th:object="${filmDetailDto}" th:action="@{/maintenance/delete}" method="post">
+        <div class="mb-3 row">
+            <label for="filmId" class="col-sm-3 col-form-label">Código</label>
             <div class="col-sm-9">
                 <input id="filmId" type="text" readonly class="form-control-plaintext" th:field="*{filmId}">
             </div>
+        </div>        <div class="mb-3 row">
+        <label for="title" class="col-sm-3 col-form-label fw-bold">Título:</label>
+        <div class="col-sm-9">
+            <input id="title" type="text" readonly class="form-control" th:field="*{title}">
         </div>
-        <div class="mb-3 row">
-            <label for="title" class="col-sm-3 col-form-label fw-bold">Título:</label>
-            <div class="col-sm-9">
-                <input id="title" type="text" readonly class="form-control" th:field="*{title}">
-            </div>
-        </div>
+    </div>
         <div class="mb-3 row">
             <label for="description" class="col-sm-3 col-form-label fw-bold">Descripción:</label>
             <div class="col-sm-9">
@@ -86,66 +83,10 @@
                 <textarea id="specialFeatures" readonly class="form-control" rows="2" th:field="*{specialFeatures}"></textarea>
             </div>
         </div>
-        <div class="mb-3 row">
-            <label for="lastUpdate" class="col-sm-3 col-form-label fw-bold">Última Actualización:</label>
-            <div class="col-sm-9">
-                <input id="lastUpdate" readonly class="form-control" th:field="*{lastUpdate}">
-            </div>
+        <div class="text-center">
+            <button type="submit" class="btn btn-primary">Eliminar Film</button>
         </div>
     </form>
-    <div class="mt-5">
-        <h4 class="text-primary">Actores Relacionados</h4>
-        <table class="table table-striped">
-            <thead>
-            <tr>
-                <th>#</th>
-                <th>ID del Actor</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr th:each="actor, iterStat : ${filmActors}">
-                <td th:text="${iterStat.count}"></td>
-                <td th:text="${actor.getFilmActorPk().getActorId()}"></td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
-    <div class="mt-5">
-        <h4 class="text-primary">Caracteristicas de la pelicula</h4>
-        <table class="table table-striped">
-            <thead>
-            <tr>
-                <th>#</th>
-                <th>ID de las Caracteristicas</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr th:each="carac, iterStat : ${filmCategories}">
-                <td th:text="${iterStat.count}"></td>
-                <td th:text="${carac.getFilmCategoryPk().getCategoryId()}"></td>
-            </tr>
-            </tbody>
-        </table>
-    </div>
-    <div class="mt-5">
-        <h4 class="text-primary">Inventario de la pelicula</h4>
-        <table class="table table-striped">
-            <thead>
-            <tr>
-                <th>#</th>
-                <th>ID de los inventarios</th>
-                <th>ID de las tiendas </th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr th:each="inventory, iterStat : ${inventories}">
-                <td th:text="${iterStat.count}"></td>
-                <td th:text="${inventory.getInventoryId()}"></td>
-                <td th:text="${inventory.getStoreId()}"></td>
-            </tr>
-            </tbody>
-        </table>
-    </div>
 </div>
 </body>
 </html>

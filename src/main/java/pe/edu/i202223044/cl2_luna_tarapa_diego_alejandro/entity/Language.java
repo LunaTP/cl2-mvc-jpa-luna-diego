@@ -19,6 +19,6 @@ public class Language {
     private String name;
     private Timestamp lastUpdate;
 
-    @OneToMany(mappedBy = "languageId", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "languageId", fetch = FetchType.EAGER)
     private List<Film> films;
 }

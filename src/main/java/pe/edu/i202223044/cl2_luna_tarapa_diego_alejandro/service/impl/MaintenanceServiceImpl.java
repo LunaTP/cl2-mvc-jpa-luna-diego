@@ -2,16 +2,11 @@ package pe.edu.i202223044.cl2_luna_tarapa_diego_alejandro.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import pe.edu.i202223044.cl2_luna_tarapa_diego_alejandro.dto.FilmDetailDto;
 import pe.edu.i202223044.cl2_luna_tarapa_diego_alejandro.dto.FilmDto;
-import pe.edu.i202223044.cl2_luna_tarapa_diego_alejandro.entity.Film;
-import pe.edu.i202223044.cl2_luna_tarapa_diego_alejandro.entity.FilmActor;
-import pe.edu.i202223044.cl2_luna_tarapa_diego_alejandro.entity.FilmCategory;
-import pe.edu.i202223044.cl2_luna_tarapa_diego_alejandro.entity.Language;
-import pe.edu.i202223044.cl2_luna_tarapa_diego_alejandro.repository.FilmActorRepository;
-import pe.edu.i202223044.cl2_luna_tarapa_diego_alejandro.repository.FilmCategoryRepository;
-import pe.edu.i202223044.cl2_luna_tarapa_diego_alejandro.repository.FilmRepository;
-import pe.edu.i202223044.cl2_luna_tarapa_diego_alejandro.repository.LanguageRepository;
+import pe.edu.i202223044.cl2_luna_tarapa_diego_alejandro.entity.*;
+import pe.edu.i202223044.cl2_luna_tarapa_diego_alejandro.repository.*;
 import pe.edu.i202223044.cl2_luna_tarapa_diego_alejandro.service.MaintenanceService;
 
 import java.sql.Timestamp;
@@ -32,6 +27,9 @@ public class MaintenanceServiceImpl implements MaintenanceService {
 
     @Autowired
     FilmCategoryRepository filmCategoryRepository;
+
+    @Autowired
+    InventoryRepository inventoryRepository;
 
     /**
      * GET
@@ -133,6 +131,20 @@ public class MaintenanceServiceImpl implements MaintenanceService {
         film.setLastUpdate(new Timestamp(new Date().getTime()));
 
         filmRepository.save(film);
+    }
+
+    /**
+     * DELETE
+     */
+    @Override
+    public void deleteFilm(Integer id) {
+        System.out.println("ID PARA REMOVER " + id);
+        filmRepository.deleteById(id);
+    }
+
+    @Override
+    public List<Inventory> getAllInventories(int filmId) {
+        return inventoryRepository.findByFilmId_FilmId(filmId);
     }
 
     //METODO AUXILIAR PARA CONVERTIR STRING A SET, YA QUE SE LE ESTARA PASANDO UN ARRAY DE STRING Y LA BD ES UN SET

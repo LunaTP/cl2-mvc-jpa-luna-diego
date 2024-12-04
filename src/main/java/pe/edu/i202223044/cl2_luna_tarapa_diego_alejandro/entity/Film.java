@@ -21,7 +21,7 @@ public class Film {
     private String description;
     private Integer releaseYear;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "language_id")
     private Language languageId;
 
@@ -34,14 +34,15 @@ public class Film {
     private String specialFeatures;
     private Timestamp lastUpdate;
 
-    @OneToMany(mappedBy = "film", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "film", cascade = CascadeType.REMOVE, fetch = FetchType.EAGER)
     private List<FilmActor> filmActors;
 
-    @OneToMany(mappedBy = "film", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "film", cascade = CascadeType.REMOVE, fetch = FetchType.EAGER)
     private List<FilmCategory> filmCategories;
 
-//    @OneToMany(mappedBy = "filmId", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-//    private List<Inventory> inventories;
+    @OneToMany(mappedBy = "filmId", cascade = CascadeType.REMOVE, orphanRemoval = true, fetch = FetchType.EAGER)
+    private List<Inventory> inventories;
+
 
 
 }
