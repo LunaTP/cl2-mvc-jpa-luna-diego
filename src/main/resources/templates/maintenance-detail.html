@@ -93,59 +93,7 @@
             </div>
         </div>
     </form>
-    <div class="mt-5">
-        <h4 class="text-primary">Actores Relacionados</h4>
-        <table class="table table-striped">
-            <thead>
-            <tr>
-                <th>#</th>
-                <th>ID del Actor</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr th:each="actor, iterStat : ${filmActors}">
-                <td th:text="${iterStat.count}"></td>
-                <td th:text="${actor.getFilmActorPk().getActorId()}"></td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
-    <div class="mt-5">
-        <h4 class="text-primary">Caracteristicas de la pelicula</h4>
-        <table class="table table-striped">
-            <thead>
-            <tr>
-                <th>#</th>
-                <th>ID de las Caracteristicas</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr th:each="carac, iterStat : ${filmCategories}">
-                <td th:text="${iterStat.count}"></td>
-                <td th:text="${carac.getFilmCategoryPk().getCategoryId()}"></td>
-            </tr>
-            </tbody>
-        </table>
-    </div>
-    <div class="mt-5">
-        <h4 class="text-primary">Inventario de la pelicula</h4>
-        <table class="table table-striped">
-            <thead>
-            <tr>
-                <th>#</th>
-                <th>ID de los inventarios</th>
-                <th>ID de las tiendas </th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr th:each="inventory, iterStat : ${inventories}">
-                <td th:text="${iterStat.count}"></td>
-                <td th:text="${inventory.getInventoryId()}"></td>
-                <td th:text="${inventory.getStoreId()}"></td>
-            </tr>
-            </tbody>
-        </table>
-    </div>
+
 </div>
 </body>
 </html>

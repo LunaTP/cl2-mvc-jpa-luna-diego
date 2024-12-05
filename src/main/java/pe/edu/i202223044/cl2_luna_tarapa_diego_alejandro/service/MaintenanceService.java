@@ -1,5 +1,7 @@
 package pe.edu.i202223044.cl2_luna_tarapa_diego_alejandro.service;
 
+import org.springframework.cache.annotation.CacheEvict;
+import pe.edu.i202223044.cl2_luna_tarapa_diego_alejandro.dto.FilmDetailCategoryDto;
 import pe.edu.i202223044.cl2_luna_tarapa_diego_alejandro.dto.FilmDetailDto;
 import pe.edu.i202223044.cl2_luna_tarapa_diego_alejandro.dto.FilmDto;
 import pe.edu.i202223044.cl2_luna_tarapa_diego_alejandro.entity.*;
@@ -17,7 +19,7 @@ public interface MaintenanceService {
     FilmDetailDto getFilmById(int id);
 
     //CREATE FILM
-    void createFilm(Film film);
+    void createFilm(FilmDetailCategoryDto film, Integer categoryCode);
 
     //UPDATE FILM
     void updateFilm(FilmDetailDto filmDetailDto);
@@ -32,26 +34,5 @@ public interface MaintenanceService {
     List<Language> getAllLanguages();
 
 
-    /**
-     * ACTOR
-     */
-    //GET ACTOR ID - HALLAR LOS AUTORES SEGUN EL ID DEL FILM
-    List<FilmActor> getActorFilmById(int filmId);
-
-
-    /**
-     * CATEGORY
-     */
-    //GET CATE ID - HALLAR LAS CATEGORIAS SEGUN EL ID DEL FILM
-    List<FilmCategory> getCategoryFilmById(int filmId);
-
-    //GET CATE ALL - HALLAS TODAS LAS CATEGORIAS
-    List<FilmCategory> getAllCategories();
-
-    /**
-     * INVENTORIES
-     */
-    //GET INV ALL - HALLAR TODOS LOS INVENTARIOS
-    List<Inventory> getAllInventories(int filmId);
 
 }

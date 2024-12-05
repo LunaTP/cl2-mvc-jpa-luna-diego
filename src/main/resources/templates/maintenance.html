@@ -33,13 +33,12 @@
                 </thead>
                 <tbody>
                 <tr th:each="item : ${films}">
-                    <td th:text="${item.filmId()}"></td>
+                    <td><a th:href="@{/maintenance/detail/{id}(id=${item.filmId()})}"><p th:text="${item.filmId()}"></p></a></td>
                     <td th:text="${item.title()}"></td>
                     <td th:text="${item.language()}"></td>
                     <td th:text="${item.rentalRate()}"></td>
                     <td>
                         <div class="d-flex gap-2">
-                            <a th:href="@{/maintenance/detail/{id}(id=${item.filmId()})}" class="btn btn-primary btn-sm text-white">Ver Detalle</a>
                             <a th:href="@{/maintenance/edit/{id}(id=${item.filmId()})}" class="btn btn-secondary btn-sm text-white">Editar</a>
                             <form th:action="@{/maintenance/delete/{id}(id=${item.filmId})}" method="post" onsubmit="confirmDeletion(event)">
                                 <button type="submit" class="btn btn-danger btn-sm text-white">Eliminar</button>

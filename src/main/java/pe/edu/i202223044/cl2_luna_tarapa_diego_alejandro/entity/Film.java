@@ -34,13 +34,13 @@ public class Film {
     private String specialFeatures;
     private Timestamp lastUpdate;
 
-    @OneToMany(mappedBy = "film", cascade = CascadeType.REMOVE, fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "film", cascade = CascadeType.REMOVE, fetch = FetchType.LAZY)
     private List<FilmActor> filmActors;
 
-    @OneToMany(mappedBy = "film", cascade = CascadeType.REMOVE, fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "film", cascade = CascadeType.REMOVE, fetch = FetchType.LAZY)
     private List<FilmCategory> filmCategories;
 
-    @OneToMany(mappedBy = "filmId", cascade = CascadeType.REMOVE, orphanRemoval = true, fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "filmId", cascade = CascadeType.REMOVE, orphanRemoval = true, fetch = FetchType.LAZY)
     private List<Inventory> inventories;
 
 

@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import pe.edu.i202223044.cl2_luna_tarapa_diego_alejandro.dto.FilmDetailCategoryDto;
 import pe.edu.i202223044.cl2_luna_tarapa_diego_alejandro.dto.FilmDetailDto;
 import pe.edu.i202223044.cl2_luna_tarapa_diego_alejandro.dto.FilmDto;
 import pe.edu.i202223044.cl2_luna_tarapa_diego_alejandro.entity.*;
@@ -36,13 +37,6 @@ public class MaintenanceController {
     @GetMapping("/detail/{id}")
     public String detail(@PathVariable Integer id, Model model) {
         FilmDetailDto filmDetailDto = maintenanceService.getFilmById(id);
-        List<FilmActor> filmActors = maintenanceService.getActorFilmById(id);
-        List<FilmCategory> filmCategories = maintenanceService.getCategoryFilmById(id);
-        List<Inventory> inventories = maintenanceService.getAllInventories(id);
-
-        model.addAttribute("inventories",inventories);
-        model.addAttribute("filmCategories",filmCategories);
-        model.addAttribute("filmActors",filmActors);
         model.addAttribute("filmDetailDto", filmDetailDto);
         return "maintenance-detail";
     }
@@ -52,18 +46,16 @@ public class MaintenanceController {
      */
     @GetMapping("/createFilm")
     public String save(Model model) {
-        Film film = new Film();
+        FilmDetailCategoryDto film = new FilmDetailCategoryDto();
         List<Language> listLanguage = maintenanceService.getAllLanguages();
-        List<FilmCategory> filmCategories = maintenanceService.getAllCategories();
         model.addAttribute("film",film);
         model.addAttribute("listLanguage", listLanguage);
-        model.addAttribute("filmCategories", filmCategories);
         return "maintenance-save";
     }
 
     @PostMapping("/create")
-    public String saveFilm(Film film) {
-        maintenanceService.createFilm(film);
+    public String saveFilm(FilmDetailCategoryDto film) {
+        maintenanceService.createFilm(film, film.getCategoryCode());
         return "redirect:/maintenance/start";
     }
 
@@ -87,12 +79,6 @@ public class MaintenanceController {
     /**
      * DELETE
      */
-//    @GetMapping("/delete/{id}")
-//    public String delete(@PathVariable Integer id, Model model) {
-//        FilmDetailDto filmDetailDto = maintenanceService.getFilmById(id);
-//        model.addAttribute("filmDetailDto", filmDetailDto);
-//        return "maintenance-delete";
-//    }
 
     @PostMapping("/delete/{id}")
     public String deleteFilm(@PathVariable Integer id) {

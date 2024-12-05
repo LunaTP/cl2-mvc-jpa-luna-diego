@@ -16,7 +16,7 @@ public class FilmActor {
     private FilmActorPk filmActorPk;
     private Timestamp lastUpdate;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "film_id")
     @MapsId("filmId")
     private Film film;

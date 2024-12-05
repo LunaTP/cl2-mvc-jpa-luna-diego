@@ -6,24 +6,24 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.sql.Timestamp;
-import java.util.List;
+import java.util.Date;
 
 @Entity
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Inventory {
+public class Rental {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer inventoryId;
+    private Integer rentalId;
+    private Date rentalDate;
 
-    private Integer storeId;
+    @ManyToOne
+    @JoinColumn(name = "inventory_id")
+    private Inventory inventoryId;
+
+    private Integer customerId;
+    private Date returnDate;
+    private Integer staffId;
     private Timestamp lastUpdate;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "film_id")
-    private Film filmId;
-
-    @OneToMany(mappedBy = "inventoryId", cascade = CascadeType.REMOVE, fetch = FetchType.LAZY)
-    private List<Rental> rentals;
 }
