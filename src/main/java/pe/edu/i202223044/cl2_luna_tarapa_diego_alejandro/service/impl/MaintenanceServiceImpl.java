@@ -2,7 +2,6 @@ package pe.edu.i202223044.cl2_luna_tarapa_diego_alejandro.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 import pe.edu.i202223044.cl2_luna_tarapa_diego_alejandro.dto.FilmDetailCategoryDto;
 import pe.edu.i202223044.cl2_luna_tarapa_diego_alejandro.dto.FilmDetailDto;
 import pe.edu.i202223044.cl2_luna_tarapa_diego_alejandro.dto.FilmDto;
@@ -26,7 +25,6 @@ public class MaintenanceServiceImpl implements MaintenanceService {
     @Autowired
     FilmCategoryRepository filmCategoryRepository;
 
-
     /**
      * GET
      */
@@ -36,7 +34,10 @@ public class MaintenanceServiceImpl implements MaintenanceService {
         Iterable<Film> iterable = filmRepository.findAll();
 
         iterable.forEach(film -> {
-            FilmDto filmDto  = new FilmDto(film.getFilmId(),film.getTitle(),film.getLanguageId().getName(),film.getRentalRate());
+            FilmDto filmDto = new FilmDto(film.getFilmId(),
+                    film.getTitle(),
+                    film.getLanguageId().getName(),
+                    film.getRentalRate());
             films.add(filmDto);
         });
         System.out.println("Fin del Listado");
@@ -48,7 +49,7 @@ public class MaintenanceServiceImpl implements MaintenanceService {
         Optional<Film> optional = filmRepository.findById(id);
 
 
-        System.out.println("Se busco exitosamente el ID: "+ id);
+        System.out.println("Se busco exitosamente el ID: " + id);
         return optional.map(film -> new FilmDetailDto(
                         film.getFilmId(),
                         film.getTitle(),
@@ -95,7 +96,7 @@ public class MaintenanceServiceImpl implements MaintenanceService {
         newFilm.setOriginalLanguageId(null);
         newFilm.setLastUpdate(new Timestamp(new Date().getTime()));
         newFilm.setSpecialFeatures(film.getSpecialFeatures() != null ?
-                        String.join(",", film.getSpecialFeatures()) : null);
+                String.join(",", film.getSpecialFeatures()) : null);
 
 
         Film filmSave = filmRepository.save(newFilm);
@@ -147,10 +148,6 @@ public class MaintenanceServiceImpl implements MaintenanceService {
         System.out.println("ID PARA REMOVER " + id);
         filmRepository.deleteById(id);
     }
-
-
-
-
 
 
     //METODO AUXILIAR PARA CONVERTIR STRING A SET, YA QUE SE LE ESTARA PASANDO UN ARRAY DE STRING Y LA BD ES UN SET

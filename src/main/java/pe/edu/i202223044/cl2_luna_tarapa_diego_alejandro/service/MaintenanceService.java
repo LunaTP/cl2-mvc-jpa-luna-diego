@@ -1,6 +1,5 @@
 package pe.edu.i202223044.cl2_luna_tarapa_diego_alejandro.service;
 
-import org.springframework.cache.annotation.CacheEvict;
 import pe.edu.i202223044.cl2_luna_tarapa_diego_alejandro.dto.FilmDetailCategoryDto;
 import pe.edu.i202223044.cl2_luna_tarapa_diego_alejandro.dto.FilmDetailDto;
 import pe.edu.i202223044.cl2_luna_tarapa_diego_alejandro.dto.FilmDto;
